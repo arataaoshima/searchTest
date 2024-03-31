@@ -1,0 +1,34 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :user_id %><br>
+    <%= form.collection_select :user_id, User.all, :id, :username, include_blank: "選択して下さい" %>
+  </div>
+
+  <div>
+  <%= form.label :category %>
+  <%= form.collection_check_boxes :category_ids, Category.all, :id, :category_name do |g| %>
+      <%= g.label(class: "checkbox-inline input_checkbox") {g.check_box(class: "checkbox") + g.text} %>
+  <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
