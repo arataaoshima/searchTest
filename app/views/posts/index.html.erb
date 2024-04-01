@@ -1,14 +1,31 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1 class="text-center p-3">Posts</h1>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
-</div>
+<table class="table">
+  <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>User</th>
+        <th>Categories</th>
+      </tr>
+  </thead>
+  <tobody>
+      <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= link_to post.title, post_path(post) %></td>
+        <td><%= post.user.username %></td>
+        <td>
+            <% post.categories.each do |category| %>
+              <%= category.category_name %>
+            <% end %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
 
 <%= link_to "New post", new_post_path %>
