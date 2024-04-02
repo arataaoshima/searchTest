@@ -2,6 +2,22 @@
 
 <h1 class="text-center p-3">Posts</h1>
 
+<div class="search-form text-center">
+  <%= form_with url: posts_path, method: :get, local: true do |f| %>
+    <div class="offset-4 col-4 text-center">
+      <div>
+        <%= f.text_field :title,class:"form-control"  %>
+      </div>
+      <div>
+        <%= f.collection_select :user_id, User.all, :id, :username, include_blank: "選択して下さい" %>
+      </div>
+      <div>
+        <%= f.submit "検索", class:"btn btn-outline-success mt-2 mb-2" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <table class="table">
   <thead>
       <tr>
