@@ -3,7 +3,9 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.search(params[:title], params[:user_id])  
+    # @posts = Post.search(params[:title], params[:user_id]) 
+    #@posts = Post.search(params[:category_ids])
+    @posts = Post.search(params[:title],params[:category_ids])  
   end
 
   # GET /posts/1 or /posts/1.json

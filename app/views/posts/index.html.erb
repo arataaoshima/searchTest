@@ -5,15 +5,38 @@
 <div class="search-form text-center">
   <%= form_with url: posts_path, method: :get, local: true do |f| %>
     <div class="offset-4 col-4 text-center">
+
+    <!--
       <div>
         <%= f.text_field :title,class:"form-control"  %>
       </div>
+    
       <div>
         <%= f.collection_select :user_id, User.all, :id, :username, include_blank: "選択して下さい" %>
       </div>
+      -->
+      <div>
+      <%= f.text_field :title,class:"form-control"  %>
+    </div>
+    <div>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name do |g| %>
+        <%= g.label(class: "checkbox-inline input_checkbox") {g.check_box(class: "checkbox") + g.text} %>
+    <% end %>
+    </div>
+
+    <!--
+      <div>
+      <%= f.collection_check_boxes :user_id, User.all, :id, :username do |g| %>
+          <%= g.label(class: "checkbox-inline input_checkbox") {g.check_box(class: "checkbox") + g.text} %>
+      <% end %>
+      </div>
+      -->
       <div>
         <%= f.submit "検索", class:"btn btn-outline-success mt-2 mb-2" %>
       </div>
+
+
+    
     </div>
   <% end %>
 </div>
